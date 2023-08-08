@@ -14,7 +14,7 @@ This repository offers an implementation of diverse segmentation models designed
 
 | Flags  | Usage | Available |
 | ------------- | ------------- | ------------- |
-| ```--network```  | Define network (Default: custom)  | custom, unet, segnet, linknet, pspnet  |
+| --network  | Define network (Default: custom)  | custom, unet, segnet, linknet, pspnet  |
 | --backbone  | Define backbone	(Default: None)  | vgg16, resnet34(not for segnet), resnet50(only for segnet), inceptionv3,                                                                    densenet121, mobilenetv2  |
 | --patch_size  | Define patch size (Default:256) |
 | --weight_path  | Set path to model weights  | 
