@@ -1,16 +1,16 @@
 # Deep-Weed-Segmentation
 
-# Introduction
+## Introduction
 This repository offers an implementation of diverse segmentation models designed for classifying weeds into four distinct categories. The provided method allows the integration of different networks and backbones to create a combination of choices.
 
-# ToDoList
+## Task List
   - [ ] Blank visualizer problem
   - [ ] UndefinedMetricWarning: F-score is ill-defined and being set to 0.0 in labels with no predicted samples
 
 
-# Features
+## Features
 
-  ## Training/Evaluation
+  ### Training/Evaluation
 ```
 Flags				       Usage										            Available
 --network			     Define network (Default: custom)			custom, unet, segnet, linknet, pspnet
@@ -30,38 +30,38 @@ Flags				       Usage										            Available
 
 for pspnet image size must be divisible by 48, the image size will be adjusted accordingly.
 ```
-# Installation
-  ## Requirements
+## Installation
+  ### Requirements
     -Python3
     -Cuda
 
-  ## Install
+  ### Install
     ```
     1. git clone
     2. pip install -r requirements.txt 
     ```
-# Training 
+## Training 
 
   > Training is set to early stopping
  ```
       1. python services/train.py --network unet --backbone vgg16 --patch_size 128 --batch_size 4 --epoch 20 --score --data_path /content/drive/MyDrive/data/CoFly-WeedDB 
  ```
-# Models
+## Models
 
   > Trained models are saved in ./models/
 
-# Dataset
+## Dataset
 
   > root of the dataset by default is ./data/CoFlyWeed-DB/
 
-# Evaluation
+## Evaluation
 
  > A model must be trained and saved in ./models/ folder first
  ```
       1. python services/eval.py --network unet --backbone vgg16
  ```
 
-# Third-Party Implementations
+## Third-Party Implementations
  1. keras implementation
  2. segmentation model implementations: https://github.com/qubvel/segmentation_models
 
