@@ -6,7 +6,7 @@ This repository offers an implementation of diverse segmentation models designed
 # ToDoList
   - [ ] Blank visualizer problem
   - [ ] UndefinedMetricWarning: F-score is ill-defined and being set to 0.0 in labels with no predicted samples
-  - [ ] https://github.com/octo-org/octo-repo/issues/740
+
 
 # Features
 
