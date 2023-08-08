@@ -12,10 +12,23 @@ This repository offers an implementation of diverse segmentation models designed
 
   ### Training/Evaluation
 
-| First Header  | Second Header |
-| ------------- | ------------- |
-| Content Cell  | Content Cell  |
-| Content Cell  | Content Cell  |
+| Flags  | Usage | Available |
+| ------------- | ------------- | ------------- |
+| --network  | Define network (Default: custom)  | custom, unet, segnet, linknet, pspnet  |
+| --backbone  | Define backbone	(Default: None)  | vgg16, resnet34(not for segnet), resnet50(only for segnet), inceptionv3,                                                                    densenet121, mobilenetv2  |
+| --patch_size  | Define patch size (Default:256)  | Content Cell  |
+| --weight_path  | Set path to model weights  | Content Cell  |
+| --data_path  | Set path to data  | Content Cell  |
+| --epoch  | Set number of epochs (Default: 50)  | Content Cell  |
+| --verbose  | Set verbose (Default: 1)  | Content Cell  |
+| --batch_size  | Set Batch size (Default: 8)  | Content Cell  |
+| --validation_size  | Set Validation size (Default: 0.1)  | Content Cell  |
+| -test_split  | Set test size (Default: 0.2)  | Content Cell  |
+| --visualizer  | Enable visualizer (Default: Not enabled)  | Content Cell  |
+| --score  | Enable score calculation after training (Default: Not enabled)  | Content Cell  |
+| --test  | Enable testing after training (Default: Not enabled)  | Content Cell  |
+| --binary  | Enable class 2 training (Default: Not enabled)  | Content Cell  |
+
 
 Flags  Usage  Available
 --network  Define network (Default: custom)			custom, unet, segnet, linknet, pspnet
