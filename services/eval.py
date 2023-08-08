@@ -1,6 +1,6 @@
 import sys
 
-sys.path.append("/home/sweekar/UAVSegmentation/")
+sys.path.append("/content/drive/MyDrive/UAVSegmentation/")
 
 from scripts.scores import Score
 from scripts.prepare_dataset import Prepare_Dataset
@@ -19,7 +19,7 @@ def main():
     parser.add_argument('--weight_path', help='path to saved weights', default='./models/')
     parser.add_argument('--binary', help='Enable Binary Segmentation', default=False, action='store_true')
     parser.add_argument('--data_path', help='root path to dataset',
-                        default='/home/sweekar/UAVSegmentation/CoFly-WeedDB')
+                        default='./data/CoFly-WeedDB')
 
     args = parser.parse_args()
 
