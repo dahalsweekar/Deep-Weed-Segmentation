@@ -4,8 +4,8 @@
 This repository offers an implementation of diverse segmentation models designed for classifying weeds into four distinct categories. The provided method allows the integration of different networks and backbones to create a combination of choices.
 
 # ToDoList
-  -Blank visualizer problem
-  -UndefinedMetricWarning: F-score is ill-defined and being set to 0.0 in labels with no predicted samples
+  [] Blank visualizer problem
+  [] UndefinedMetricWarning: F-score is ill-defined and being set to 0.0 in labels with no predicted samples
 
 # Features
 
@@ -33,6 +33,8 @@ for pspnet image size must be divisible by 48, the image size will be adjusted a
   ## Requirements
     -Python3
     -Cuda
+
+  ## Install
     ```
     1. git clone
     2. pip install -r requirements.txt 
@@ -41,19 +43,19 @@ for pspnet image size must be divisible by 48, the image size will be adjusted a
 
   > Training is set to early stopping
  ```
-      1. python services/train.py --network unet --backbone vgg16 --patch_size 128 --batch_size 4 --epoch 20 --score --data_path /content            /drive/MyDrive/data/CoFly-WeedDB 
+      1. python services/train.py --network unet --backbone vgg16 --patch_size 128 --batch_size 4 --epoch 20 --score --data_path /content/drive/MyDrive/data/CoFly-WeedDB 
  ```
 # Models
 
-  Trained models are saved in ./models/
+  > Trained models are saved in ./models/
 
 # Dataset
 
-  root of the dataset by default is ./data/CoFlyWeed-DB/
+  > root of the dataset by default is ./data/CoFlyWeed-DB/
 
 # Evaluation
 
- A model must be trained and saved in ./models/ folder first
+ > A model must be trained and saved in ./models/ folder first
  ```
       1. python services/eval.py --network unet --backbone vgg16
  ```
