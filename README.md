@@ -45,7 +45,7 @@ for ```pspnet``` image size must be divisible by 48, the image size will be adju
     -Cuda
 
   ### Install
-    1. git clone
+    1. git clone https://github.com/dahalsweekar/Deep-Weed-Segmentation.git
     2. pip install -r requirements.txt 
     
 ## Training 
