@@ -4,8 +4,8 @@
 This repository offers an implementation of diverse segmentation models designed for classifying weeds into four distinct categories. The provided method allows the integration of different networks and backbones to create a combination of choices.
 
 ## Task List
-  - [ ] Blank visualizer problem
-  - [ ] UndefinedMetricWarning: F-score is ill-defined and being set to 0.0 in labels with no predicted samples
+  - [ ] Blank visualizer problem (Only occurs when saved model is loaded)
+  - [ ] UndefinedMetricWarning: F-score is ill-defined and being set to 0.0 in labels with no predicted samples (Only occurs when saved model is loaded)
 
 
 ## Features
