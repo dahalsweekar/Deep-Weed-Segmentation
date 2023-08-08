@@ -20,7 +20,7 @@ def main():
     parser.add_argument('--weight_path', help='path to saved weights', default='./models')
     parser.add_argument('--image_path', help='path to image', default='./images')
     parser.add_argument('--patch_size', help='Patch size', default=256)
-    parser.add_argument('--binary', type=bool, help='Enable Binary Segmentation', default=False, action='store_true')
+    parser.add_argument('--binary', help='Enable Binary Segmentation', default=False, action='store_true')
     parser.add_argument('--data_path', help='root path to dataset',
                         default='./CoFly-WeedDB')
 
@@ -89,26 +89,28 @@ class Test:
             print(err)
             quit()
 
-        test_img_number = random.randint(0, len(self.X_test))
-        test_img = self.X_test[test_img_number]
-        ground_truth = self.Y_test[test_img_number]
-        # test_img_norm=test_img[:,:,0][:,:,None]
-        test_img_input = np.expand_dims(test_img, 0)
-        prediction = (model.predict(test_img_input))
-        predicted_img = np.argmax(prediction, axis=3)[0, :, :]
+        counter = 0
+        for img in range(len(self.X_test)):
+            counter = counter + 1
+            test_img = self.X_test[img]
+            ground_truth = self.Y_test[img]
+            # test_img_norm=test_img[:,:,0][:,:,None]
+            test_img_input = np.expand_dims(test_img, 0)
+            prediction = (model.predict(test_img_input))
+            predicted_img = np.argmax(prediction, axis=3)[0, :, :]
 
-        plt.figure(figsize=(12, 8))
-        plt.subplot(231)
-        plt.title('Testing Image')
-        plt.imshow(test_img)
-        plt.subplot(232)
-        plt.title('Testing Label')
-        plt.imshow(ground_truth, cmap='jet')
-        plt.subplot(233)
-        plt.title('Prediction on test image')
-        plt.imshow(predicted_img, cmap='jet')
-        plt.savefig('./plots/figure.png')
-        plt.show()
+            plt.figure(figsize=(12, 8))
+            plt.subplot(231)
+            plt.title('Testing Image')
+            plt.imshow(test_img)
+            plt.subplot(232)
+            plt.title('Testing Label')
+            plt.imshow(ground_truth, cmap='jet')
+            plt.subplot(233)
+            plt.title('Prediction on test image')
+            plt.imshow(predicted_img, cmap='jet')
+            plt.savefig(f'./plots/figure_{counter}_.png')
+            print(f'{(counter/len(self.X_test))*100}% done.')
 
 
 if __name__ == '__main__':
