@@ -7,6 +7,10 @@ from sklearn.model_selection import train_test_split
 from keras.utils import normalize
 import os
 
+import sys
+
+sys.path.append("/content/drive/MyDrive/UAVSegmentation/")
+
 os.environ["SM_FRAMEWORK"] = "tf.keras"
 import segmentation_models as sm
 import numpy as np
@@ -16,9 +20,9 @@ from scripts.create_patch import Patches
 
 class Prepare_Dataset:
     def __init__(self, PATCH_SIZE, binary=False, backbone='None',
-                 train_split_file='/home/sweekar/UAVSegmentation/CoFly-WeedDB/train_split1.txt',
-                 test_split_file='/home/sweekar/UAVSegmentation/CoFly-WeedDB/test_split1.txt', IMG_CHANNELS=3,
-                 test_size=0.2, data_path='/home/sweekar/UAVSegmentation/CoFly-WeedDB'):
+                 train_split_file='./data/CoFly-WeedDB/train_split1.txt',
+                 test_split_file='./data/CoFly-WeedDB/test_split1.txt', IMG_CHANNELS=3,
+                 test_size=0.2, data_path='./data/CoFly-WeedDB'):
         self.train_split_file = train_split_file
         self.test_split_file = test_split_file
         self.PATCH_SIZE = PATCH_SIZE
