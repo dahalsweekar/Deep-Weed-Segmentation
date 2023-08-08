@@ -14,7 +14,7 @@ This repository offers an implementation of diverse segmentation models designed
 
 | Flags  | Usage | Available |
 | ------------- | ------------- | ------------- |
-| --network  | Define network (Default: custom)  | custom, unet, segnet, linknet, pspnet  |
+| ```--network```  | Define network (Default: custom)  | custom, unet, segnet, linknet, pspnet  |
 | --backbone  | Define backbone	(Default: None)  | vgg16, resnet34(not for segnet), resnet50(only for segnet), inceptionv3,                                                                    densenet121, mobilenetv2  |
 | --patch_size  | Define patch size (Default:256) |
 | --weight_path  | Set path to model weights  | 
@@ -28,23 +28,6 @@ This repository offers an implementation of diverse segmentation models designed
 | --score  | Enable score calculation after training (Default: Not enabled)  |
 | --test  | Enable testing after training (Default: Not enabled)  |
 | --binary  | Enable class 2 training (Default: Not enabled)  |
-
-
-Flags  Usage  Available
---network  Define network (Default: custom)			custom, unet, segnet, linknet, pspnet
---backbone  Define backbone	(Default: None)			vgg16, resnet34(not for segnet), resnet50(only for segnet), inceptionv3,                                                                    densenet121, mobilenetv2
---patch_size  Define patch size (Default:256)
---weight_path  Set path to model weights
---data_path  Set path to data
---epoch  Set number of epochs (Default: 50)
---verbose 			   Set verbose (Default: 1)
---batch_size		   Set Batch size (Default: 8)
---validation_size  Set Validation size (Default: 0.1)
---test_split		   Set test size (Default: 0.2)
---visualizer		   Enable visualizer (Default: Not enabled)
---score				     Enable score calculation after training (Default: Not enabled)
---test				     Enable testing after training (Default: Not enabled)
---binary			     Enable class 2 training (Default: Not enabled)
 
 for pspnet image size must be divisible by 48, the image size will be adjusted accordingly.
 
