@@ -7,7 +7,7 @@ from tensorflow import keras
 import segmentation_models as sm
 import sys
 
-sys.path.append("/home/sweekar/UAVSegmentation/")
+sys.path.append("/content/drive/MyDrive/UAVSegmentation/")
 
 from scripts.model import Models
 from scripts.prepare_dataset import Prepare_Dataset
@@ -26,7 +26,7 @@ def main():
     parser.add_argument('--patch_size', type=int, help='Patch size', default=256)
     parser.add_argument('--weight_path', help='Saved weights path', default='./models/')
     parser.add_argument('--data_path', help='root path to dataset',
-                        default='./CoFly-WeedDB')
+                        default='./data/CoFly-WeedDB')
     parser.add_argument('--epoch', type=int, help='number of epoches', default=50)
     parser.add_argument('--verbose', type=int, help='verbose', default=1)
     parser.add_argument('--batch_size', type=int, help='Batch size', default=8)
