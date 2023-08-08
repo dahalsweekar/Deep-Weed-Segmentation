@@ -70,6 +70,6 @@ for ```pspnet``` image size must be divisible by 48, the image size will be adju
  ```
 
 ## Third-Party Implementations
- 1. keras implementation
- 2. segmentation model implementations: https://github.com/qubvel/segmentation_models
+ - Keras implementation
+ - Segmentation model implementations: https://github.com/qubvel/segmentation_models
 
