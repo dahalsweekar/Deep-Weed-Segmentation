@@ -12,13 +12,13 @@ This repository offers an implementation of diverse segmentation models designed
 
   ### Training/Evaluation
 ```
-Flags				       Usage										            Available
---network			     Define network (Default: custom)			custom, unet, segnet, linknet, pspnet
---backbone		     Define backbone	(Default: None)			vgg16, resnet34(not for segnet), resnet50(only for segnet), inceptionv3,                                                                    densenet121, mobilenetv2
---patch_size		   Define patch size (Default:256)
---weight_path		   Set path to model weights
---data_path 		   Set path to data
---epoch				     Set number of epochs (Default: 50)
+Flags  Usage  Available
+--network  Define network (Default: custom)			custom, unet, segnet, linknet, pspnet
+--backbone  Define backbone	(Default: None)			vgg16, resnet34(not for segnet), resnet50(only for segnet), inceptionv3,                                                                    densenet121, mobilenetv2
+--patch_size  Define patch size (Default:256)
+--weight_path  Set path to model weights
+--data_path  Set path to data
+--epoch  Set number of epochs (Default: 50)
 --verbose 			   Set verbose (Default: 1)
 --batch_size		   Set Batch size (Default: 8)
 --validation_size  Set Validation size (Default: 0.1)
