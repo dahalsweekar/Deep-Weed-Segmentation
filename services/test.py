@@ -1,6 +1,6 @@
 import sys
 
-sys.path.append("/home/sweekar/UAVSegmentation/")
+sys.path.append("/content/drive/MyDrive/UAVSegmentation/")
 
 import numpy as np
 import random
