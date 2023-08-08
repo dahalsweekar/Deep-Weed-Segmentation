@@ -11,7 +11,7 @@ This repository offers an implementation of diverse segmentation models designed
 ## Features
 
   ### Training/Evaluation
-```
+
 | First Header  | Second Header |
 | ------------- | ------------- |
 | Content Cell  | Content Cell  |
@@ -34,7 +34,7 @@ Flags  Usage  Available
 --binary			     Enable class 2 training (Default: Not enabled)
 
 for pspnet image size must be divisible by 48, the image size will be adjusted accordingly.
-```
+
 ## Installation
   ### Requirements
     -Python3
