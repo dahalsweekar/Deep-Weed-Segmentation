@@ -60,7 +60,7 @@ for ```pspnet``` image size must be divisible by 48, the image size will be adju
 
 ## Dataset
 
-  > root of the dataset by default is ./data/CoFlyWeed-DB/
+  > Root of the dataset, by default, is ./data/CoFlyWeed-DB/
 
 ## Evaluation
 
