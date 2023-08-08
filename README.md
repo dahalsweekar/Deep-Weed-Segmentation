@@ -12,10 +12,10 @@ This repository offers an implementation of diverse segmentation models designed
 
   ### Training/Evaluation
 
-| Flags  | Usage | Available |
-| ------------- | ------------- | ------------- |
-| ```--network``` | Define network (Default: custom)  | ```custom```, ```unet```, ```segnet```, ```linknet```, ```pspnet```  |
-| ```--backbone```  | Define backbone	(Default: None)  | ```vgg16```, ```resnet34```(not for segnet), ```resnet50```(only for segnet), inceptionv3,                                                                    ```densenet121```, ```mobilenetv2```  |
+| Flags  | Usage |
+| ------------- | ------------- |
+| ```--network``` | Define network (Default: custom)  | 
+| ```--backbone```  | Define backbone	(Default: None)  |                                                                   
 | ```--patch_size```  | Define patch size (Default:256) |
 | ```--weight_path```  | Set path to model weights  | 
 | ```--data_path```  | Set path to data  | 
@@ -45,10 +45,9 @@ for ```pspnet``` image size must be divisible by 48, the image size will be adju
     -Cuda
 
   ### Install
-    ```
     1. git clone
     2. pip install -r requirements.txt 
-    ```
+    
 ## Training 
 
   > Training is set to early stopping
