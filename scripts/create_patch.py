@@ -37,6 +37,8 @@ class Patches:
     def patchify_image_mask(self):
         imgs = []
         anns = []
+        AREA = self.PATCH_SIZE * self.PATCH_SIZE
+        f_AREA = int(0.10 * AREA)
         print(f"Patchyfying images and mask...")
         for im_path, msk_path in zip(self.im_list, self.msk_list):
             patches, _ = self.image_to_patches(self.load_image(im_path))
@@ -45,7 +47,7 @@ class Patches:
                 for j in range(patches.shape[1]):
                     patch = patches[i, j, :, :, :]
                     mask = masks[i, j, ::]
-                    if mask.reshape(-1).sum() > 2000:
+                    if mask.reshape(-1).sum() > f_AREA:
                         imgs.append(patch)
                         anns.append(mask)
         return np.array(imgs), np.array(anns)
