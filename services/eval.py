@@ -8,6 +8,7 @@ import argparse
 from scripts.model import Models
 from tensorflow import keras
 import segmentation_models as sm
+import tensorflow_advanced_segmentation_models as tasm
 import os
 
 
@@ -67,6 +68,16 @@ class Eval:
         elif self.network == 'unet' or self.network == 'linknet' or self.network == 'pspnet':
             model = Models(self.n_classes, self.PATCH_SIZE, IMG_CHANNELS=3, model_name=self.network,
                            backbone=self.backbone).segmented_models()
+        elif self.network == 'deeplabv3':
+            base_model, layers, layer_names = Models(self.n_classes, self.PATCH_SIZE, IMG_CHANNELS=3,
+                                                     model_name=self.network,
+                                                     backbone=self.backbone).deeplabv3(name=self.backbone,
+                                                                                       weights='imagenet',
+                                                                                       height=self.PATCH_SIZE,
+                                                                                       width=self.PATCH_SIZE)
+            model = tasm.DeepLabV3plus(n_classes=self.n_classes, base_model=base_model, output_layers=layers,
+                                       backbone_trainable=False)
+            model.build((None, self.PATCH_SIZE, self.PATCH_SIZE, 3))
         else:
             print(f'{self.network} network not available.')
             quit()
