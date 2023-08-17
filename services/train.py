@@ -5,9 +5,11 @@ import argparse
 os.environ["SM_FRAMEWORK"] = "tf.keras"
 from tensorflow import keras
 import segmentation_models as sm
+import tensorflow_advanced_segmentation_models as tasm
 import sys
 
-sys.path.append("/content/drive/MyDrive/UAVSegmentation/")
+# sys.path.append("/content/drive/MyDrive/UAVSegmentation/")
+sys.path.append("/home/sweekar/Deep-Weed-Segmentation/")
 
 from scripts.model import Models
 from scripts.prepare_dataset import Prepare_Dataset
@@ -24,6 +26,7 @@ def main():
     parser.add_argument('--network', help='Network Model type', default='custom')
     parser.add_argument('--backbone', help='Backbone', default='None')
     parser.add_argument('--patch_size', type=int, help='Patch size', default=256)
+    parser.add_argument('--augment', help='Enable Augmentation', default=False, action='store_true')
     parser.add_argument('--weight_path', help='Saved weights path', default='./models/')
     parser.add_argument('--data_path', help='root path to dataset',
                         default='./data/CoFly-WeedDB')
@@ -43,19 +46,21 @@ def main():
     args = {k: v for k, v in args.items() if v is not None}
     Train(args['network'], args['backbone'], args['epoch'], args['verbose'], args['batch_size'],
           args['validation_split'], args['test_split'], args['weight_path'], args['visualizer'], args['data_path'],
-          args['score'], args['test'], args['binary'], args['patch_size']).train_model()
+          args['score'], args['test'], args['binary'], args['augment'], args['patch_size']).train_model()
 
 
 class Train:
 
     def __init__(self, network, backbone, epoch, verbose, batch_size, validation_split, test_split, weight_path,
-                 visualizer, data_path, score, test, binary, PATCH_SIZE=256):
+                 visualizer, data_path, score, test, binary, augment, PATCH_SIZE=256):
         self.test_size = test_split
         self.network = network
         self.backbone = backbone
+        self.augment = augment
         self.PATCH_SIZE = self.size_(PATCH_SIZE)
         (self.Y_train_cat, self.Y_test_cat, self.X_train, self.Y_test, self.X_test, self.p_weights,
-         self.n_classes) = Prepare_Dataset(self.PATCH_SIZE, binary, backbone=backbone, test_size=test_split,
+         self.n_classes) = Prepare_Dataset(self.PATCH_SIZE, self.augment, binary, backbone=backbone,
+                                           test_size=test_split,
                                            data_path=data_path).prepare_all()
         self.total_loss = Prepare_Dataset(self.PATCH_SIZE).get_loss(p_weights=self.p_weights)
         self.epoch = epoch
@@ -93,6 +98,16 @@ class Train:
         elif self.network == 'unet' or self.network == 'linknet' or self.network == 'pspnet':
             model = Models(self.n_classes, self.PATCH_SIZE, IMG_CHANNELS=3, model_name=self.network,
                            backbone=self.backbone).segmented_models()
+        elif self.network == 'deeplabv3':
+            base_model, layers, layer_names = Models(self.n_classes, self.PATCH_SIZE, IMG_CHANNELS=3,
+                                                     model_name=self.network,
+                                                     backbone=self.backbone).deeplabv3(name=self.backbone,
+                                                                                       weights='imagenet',
+                                                                                       height=self.PATCH_SIZE,
+                                                                                       width=self.PATCH_SIZE)
+            model = tasm.DeepLabV3plus(n_classes=self.n_classes, base_model=base_model, output_layers=layers,
+                                       backbone_trainable=False)
+            model.build((None, self.PATCH_SIZE, self.PATCH_SIZE, 3))
         else:
             print(f'{self.network} network not available.')
             quit()
