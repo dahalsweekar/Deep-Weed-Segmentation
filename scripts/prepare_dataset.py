@@ -16,10 +16,11 @@ import segmentation_models as sm
 import numpy as np
 from keras.utils import to_categorical
 from scripts.create_patch import Patches
+from scripts.augment import Augment
 
 
 class Prepare_Dataset:
-    def __init__(self, PATCH_SIZE, binary=False, backbone='None',
+    def __init__(self, PATCH_SIZE, augment=False, binary=False, backbone='None',
                  train_split_file='./data/CoFly-WeedDB/train_split1.txt',
                  test_split_file='./data/CoFly-WeedDB/test_split1.txt', IMG_CHANNELS=3,
                  test_size=0.2, data_path='./data/CoFly-WeedDB'):
@@ -31,6 +32,7 @@ class Prepare_Dataset:
         self.backbone = backbone
         self.data_path = data_path
         self.binary = binary
+        self.augment = augment
 
     def read_files(self, train_split_file, test_split_file):
         # read test file name and store into a list
@@ -87,6 +89,10 @@ class Prepare_Dataset:
                                                             random_state=0)
         return X_train, X_test, Y_train, Y_test
 
+    def augment_dataset(self, X_train, Y_train):
+        X_train, Y_train = Augment(X_train, Y_train).augment()
+        return X_train, Y_train
+
     def covert_to_categorical(self, Y_train, Y_test, n_classes):
         Y_train_cat = to_categorical(Y_train, num_classes=n_classes)
         # Y_train_cat = train_masks_cat.reshape((Y_train.shape[0], Y_train.shape[1], Y_train.shape[2], n_classes))
@@ -138,6 +144,11 @@ class Prepare_Dataset:
         X_train, X_test, Y_train, Y_test = self.train_test_split(train_images=image,
                                                                  mask=mask)
         print(f'Train shape:{X_train.shape}\nTest shape: {Y_train.shape}')
+
+        if self.augment:
+            print('Augmenting Dataset...')
+            X_train, Y_train = self.augment_dataset(X_train, Y_train)
+            print(f'Train shape:{X_train.shape}\nTest shape: {Y_train.shape}')
 
         Y_train_cat, Y_test_cat = self.covert_to_categorical(Y_train=Y_train, Y_test=Y_test, n_classes=n_classes)
 
