@@ -28,14 +28,16 @@ This repository offers an implementation of diverse segmentation models designed
 | ```--score```  | Enable score calculation after training (Default: Not enabled)  |
 | ```--test```  | Enable testing after training (Default: Not enabled)  |
 | ```--binary```  | Enable class 2 training (Default: Not enabled)  |
+| ```--augment```  | Enable Augmentation (Default: Not enabled) **_WARNING!_ May cause system to crash** |
 
 | Network  | BackBone |
 | ------------- | ------------- |
 | ```custom``` |```None``` |
-| ```unet``` | ```vgg16```, ```resnet34```, ```inceptionv3```,                                                             ```densenet121```, ```mobilenetv2``` |
-| ```linknet``` | ```vgg16```, ```resnet34```, ```inceptionv3```,                                                             ```densenet121```, ```mobilenetv2``` |
-| ```pspnet``` | ```vgg16```, ```resnet34```, ```inceptionv3```,                                                             ```densenet121```, ```mobilenetv2``` |
-| ```segnet``` | ```vgg16```, ```resnet50```, ```inceptionv3```,                                                             ```densenet121```, ```mobilenetv2``` |
+| ```unet``` | ```vgg16```, ```resnet34```, ```inceptionv3```, ```efficientnetb0```,                                                            ```densenet121```, ```mobilenetv2``` |
+| ```linknet``` | ```vgg16```, ```resnet34```, ```inceptionv3```, ```efficientnetb0```,                                                            ```densenet121```, ```mobilenetv2``` |
+| ```pspnet``` | ```vgg16```, ```resnet34```, ```inceptionv3```, ```efficientnetb0```,                                                            ```densenet121```, ```mobilenetv2``` |
+| ```segnet``` | ```vgg16```, ```resnet50```, ```inceptionv3```, ```efficientnetb0```,                                                             ```densenet121```, ```mobilenetv2``` |
+| ```deeplabv3``` | ```vgg16```, ```resnet50```, ```inceptionv3```, ```efficientnetb0```,                                                             ```densenet121```, ```mobilenetv2``` |
 
 for ```pspnet``` image size must be divisible by 48, the image size will be adjusted accordingly.
 
