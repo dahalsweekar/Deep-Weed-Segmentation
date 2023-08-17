@@ -74,4 +74,5 @@ for ```pspnet``` image size must be divisible by 48, the image size will be adju
 ## Third-Party Implementations
  - Keras implementation
  - Segmentation model implementations: https://github.com/qubvel/segmentation_models
+ - Advance Segmentation models: https://github.com/JanMarcelKezmann/TensorFlow-Advanced-Segmentation-Models
 
