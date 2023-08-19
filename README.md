@@ -29,6 +29,7 @@ This repository offers an implementation of diverse segmentation models designed
 | ```--test```  | Enable testing after training (Default: Not enabled)  |
 | ```--binary```  | Enable class 2 training (Default: Not enabled)  |
 | ```--augment```  | Enable Augmentation (Default: Not enabled) **_WARNING!_ May cause system to crash** |
+| ```--threshold```  | Set threshold value (Default: 0.03)  |
 
 | Network  | BackBone |
 | ------------- | ------------- |
