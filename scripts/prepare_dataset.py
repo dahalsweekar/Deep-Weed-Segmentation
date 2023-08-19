@@ -20,7 +20,7 @@ from scripts.augment import Augment
 
 
 class Prepare_Dataset:
-    def __init__(self, PATCH_SIZE, augment=False, binary=False, backbone='None',
+    def __init__(self, PATCH_SIZE, augment=False, threshold=0.03, binary=False, backbone='None',
                  train_split_file='./data/CoFly-WeedDB/train_split1.txt',
                  test_split_file='./data/CoFly-WeedDB/test_split1.txt', IMG_CHANNELS=3,
                  test_size=0.2, data_path='./data/CoFly-WeedDB'):
@@ -33,6 +33,7 @@ class Prepare_Dataset:
         self.data_path = data_path
         self.binary = binary
         self.augment = augment
+        self.threshold = threshold
 
     def read_files(self, train_split_file, test_split_file):
         # read test file name and store into a list
@@ -60,7 +61,7 @@ class Prepare_Dataset:
         return img_lst, msk_lst
 
     def get_image_patches(self, im_list, msk_list):
-        imgs, anns = Patches(im_list, msk_list, self.PATCH_SIZE).patchify_image_mask()
+        imgs, anns = Patches(im_list, msk_list, self.PATCH_SIZE, threshold=self.threshold).patchify_image_mask()
         return imgs, anns
 
     def binary_class(self, mask):

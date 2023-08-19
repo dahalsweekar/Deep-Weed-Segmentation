@@ -8,8 +8,7 @@ import segmentation_models as sm
 import tensorflow_advanced_segmentation_models as tasm
 import sys
 
-# sys.path.append("/content/drive/MyDrive/UAVSegmentation/")
-sys.path.append("/home/sweekar/Deep-Weed-Segmentation/")
+sys.path.append("/content/drive/MyDrive/UAVSegmentation/")
 
 from scripts.model import Models
 from scripts.prepare_dataset import Prepare_Dataset
@@ -39,6 +38,7 @@ def main():
     parser.add_argument('--score', help='print scores after completion', default=False, action='store_true')
     parser.add_argument('--test', help='test after completion', default=False, action='store_true')
     parser.add_argument('--binary', help='Enable Binary Segmentation', default=False, action='store_true')
+    parser.add_argument('--threshold', type=float, help='Set threshold cutoff', default=0.03)
 
     args = parser.parse_args()
 
@@ -46,20 +46,21 @@ def main():
     args = {k: v for k, v in args.items() if v is not None}
     Train(args['network'], args['backbone'], args['epoch'], args['verbose'], args['batch_size'],
           args['validation_split'], args['test_split'], args['weight_path'], args['visualizer'], args['data_path'],
-          args['score'], args['test'], args['binary'], args['augment'], args['patch_size']).train_model()
+          args['score'], args['test'], args['binary'], args['augment'], args['threshold'], args['patch_size']).train_model()
 
 
 class Train:
 
     def __init__(self, network, backbone, epoch, verbose, batch_size, validation_split, test_split, weight_path,
-                 visualizer, data_path, score, test, binary, augment, PATCH_SIZE=256):
+                 visualizer, data_path, score, test, binary, augment, threshold, PATCH_SIZE=256):
         self.test_size = test_split
         self.network = network
         self.backbone = backbone
         self.augment = augment
+        self.threshold = threshold
         self.PATCH_SIZE = self.size_(PATCH_SIZE)
         (self.Y_train_cat, self.Y_test_cat, self.X_train, self.Y_test, self.X_test, self.p_weights,
-         self.n_classes) = Prepare_Dataset(self.PATCH_SIZE, self.augment, binary, backbone=backbone,
+         self.n_classes) = Prepare_Dataset(self.PATCH_SIZE, self.augment, self.threshold, binary, backbone=backbone,
                                            test_size=test_split,
                                            data_path=data_path).prepare_all()
         self.total_loss = Prepare_Dataset(self.PATCH_SIZE).get_loss(p_weights=self.p_weights)

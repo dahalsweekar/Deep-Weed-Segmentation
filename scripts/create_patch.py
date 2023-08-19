@@ -6,10 +6,11 @@ from skimage import io as skio
 
 class Patches:
 
-    def __init__(self, im_list, msk_list, PATCH_SIZE):
+    def __init__(self, im_list, msk_list, PATCH_SIZE, threshold=0.03):
         self.im_list = im_list
         self.msk_list = msk_list
         self.PATCH_SIZE = PATCH_SIZE
+        self.threshold = threshold
 
     def image_to_patches(self, image, b_msk=False):
         slc_size = self.PATCH_SIZE
@@ -38,7 +39,8 @@ class Patches:
         imgs = []
         anns = []
         AREA = self.PATCH_SIZE * self.PATCH_SIZE
-        f_AREA = int(0.10 * AREA)
+        f_AREA = int(self.threshold * AREA)
+        print(f'Threshold: {self.threshold} * {AREA} = {f_AREA}')
         print(f"Patchyfying images and mask...")
         for im_path, msk_path in zip(self.im_list, self.msk_list):
             patches, _ = self.image_to_patches(self.load_image(im_path))
