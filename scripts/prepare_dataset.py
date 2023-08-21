@@ -9,7 +9,7 @@ import os
 
 import sys
 
-sys.path.append("/content/drive/MyDrive/UAVSegmentation/")
+sys.path.append("/content/drive/MyDrive/Deep-Weed-Segmentation/")
 
 os.environ["SM_FRAMEWORK"] = "tf.keras"
 import segmentation_models as sm

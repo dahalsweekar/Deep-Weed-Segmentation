@@ -2,6 +2,7 @@ from sklearn.metrics import confusion_matrix
 from sklearn.metrics import classification_report, f1_score, cohen_kappa_score
 from keras.metrics import MeanIoU
 import numpy as np
+import sklearn
 
 
 class Score:
@@ -29,8 +30,9 @@ class Score:
         y_pred_argmax = np.argmax(y_pred, axis=3)
         y_flat = self.Y_test.reshape(-1)
         y_pred_falt = y_pred_argmax.reshape(-1)
+        report = classification_report(y_flat, y_pred_falt, output_dict=True)
         print(classification_report(y_flat, y_pred_falt, digits=4))
-        return y_pred_argmax
+        return y_pred_argmax, report
 
     def mean_iou(self, y_pred_argmax):
         n_classes = self.n_classes
@@ -68,13 +70,12 @@ class Score:
         else:
             print(f'Metrics for {self.n_classes} classes not available.')
 
-    def accuracy(self):
-        _, dice, acc = self.model.evaluate(self.X_test, self.Y_test_cat)
-        print("\nAccuracy is = ", (acc * 100.0), "%")
+    def accuracy(self, report):
+        print("\nAccuracy = ", (report['accuracy'] * 100.0), "%")
 
     def calc_scores(self):
         print('Calculating Scores...')
-        y_pred_max = self.cs_report()
+        y_pred_max, report = self.cs_report()
         IOU_keras = self.mean_iou(y_pred_max)
         self.iou_classes(IOU_keras)
-        self.accuracy()
+        self.accuracy(report)
