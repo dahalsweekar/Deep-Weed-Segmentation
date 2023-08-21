@@ -1,6 +1,6 @@
 import sys
 
-sys.path.append("/content/drive/MyDrive/UAVSegmentation/")
+sys.path.append("/content/drive/MyDrive/Deep-Weed-Segmentation/")
 
 from scripts.scores import Score
 from scripts.prepare_dataset import Prepare_Dataset

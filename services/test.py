@@ -1,6 +1,6 @@
 import sys
 
-sys.path.append("/content/drive/MyDrive/UAVSegmentation/")
+sys.path.append("/content/drive/MyDrive/Deep-Weed-Segmentation/")
 
 import numpy as np
 import random
