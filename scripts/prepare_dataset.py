@@ -109,7 +109,7 @@ class Prepare_Dataset:
         return total_loss
 
     def save_model(self, model, path):
-        model.save(path, overwrite=True)
+        model.save_weights(path, overwrite=True)
 
     def prepare_all(self):
         print('Preparing Dataset...')
@@ -144,12 +144,12 @@ class Prepare_Dataset:
 
         X_train, X_test, Y_train, Y_test = self.train_test_split(train_images=image,
                                                                  mask=mask)
-        print(f'Train shape:{X_train.shape}\nTest shape: {Y_train.shape}')
+        print(f'Train shape:{X_train.shape}\nTest shape: {X_test.shape}')
 
         if self.augment:
             print('Augmenting Dataset...')
             X_train, Y_train = self.augment_dataset(X_train, Y_train)
-            print(f'Train shape:{X_train.shape}\nTest shape: {Y_train.shape}')
+            print(f'Train shape:{X_train.shape}\nTest shape: {X_test.shape}')
 
         Y_train_cat, Y_test_cat = self.covert_to_categorical(Y_train=Y_train, Y_test=Y_test, n_classes=n_classes)
 

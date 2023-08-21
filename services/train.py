@@ -8,7 +8,7 @@ import segmentation_models as sm
 import tensorflow_advanced_segmentation_models as tasm
 import sys
 
-sys.path.append("/content/drive/MyDrive/UAVSegmentation/")
+sys.path.append("/home/sweekar/Deep-Weed-Segmentation/")
 
 from scripts.model import Models
 from scripts.prepare_dataset import Prepare_Dataset
