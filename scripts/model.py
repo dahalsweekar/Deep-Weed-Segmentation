@@ -1,6 +1,6 @@
 from keras.models import Model
 from keras.layers import Input, Conv2D, MaxPooling2D, UpSampling2D, concatenate, Conv2DTranspose, BatchNormalization, \
-    Dropout, Lambda
+    Dropout, Lambda, Activation
 from keras.applications import VGG16, InceptionV3, MobileNetV2, DenseNet121, ResNet50, EfficientNetB0
 import segmentation_models as sm
 import keras
@@ -152,7 +152,7 @@ class Models:
             m_output = weights.get_layer('block_13_expand').output
         elif self.backbone == 'densenet121':
             # Load DenseNet without the classification layers (include_top=False)
-            weights = DenseNet121(weights='imagenet', includet_op=False,
+            weights = DenseNet121(weights='imagenet', include_top=False,
                                   input_shape=(self.PATCH_SIZE, self.PATCH_SIZE, self.IMG_CHANNELS))
             # Retrieve the DenseNet121's first layer
             input_m = weights.layers[0].input
@@ -174,63 +174,102 @@ class Models:
                 self.backbone = 'None'
                 if choice != 'y':
                     quit()
+
+            print('building with segnet encoder...')
             # Encode Block
             input_m = Input(shape=(self.PATCH_SIZE, self.PATCH_SIZE, self.IMG_CHANNELS))
 
             # Encoder block 1
-            conv1 = Conv2D(64, (3, 3), activation='relu', padding='same')(input_m)
-            conv2 = Conv2D(64, (3, 3), activation='relu', padding='same')(conv1)
+            conv1 = Conv2D(64, (3, 3), padding='same')(input_m)
+            conv1 = BatchNormalization()(conv1)  # Add BatchNormalization
+            conv1 = Activation("relu")(conv1)  # Add ReLU activation
+            conv2 = Conv2D(64, (3, 3), padding='same')(conv1)
+            conv2 = BatchNormalization()(conv2)  # Add BatchNormalization
+            conv2 = Activation("relu")(conv2)  # Add ReLU activation
             pool1 = MaxPooling2D(pool_size=(2, 2))(conv2)
 
             # Encoder block 2
-            conv1 = Conv2D(128, (3, 3), activation='relu', padding='same')(pool1)
-            conv2 = Conv2D(128, (3, 3), activation='relu', padding='same')(conv1)
+            conv1 = Conv2D(128, (3, 3), padding='same')(pool1)
+            conv1 = BatchNormalization()(conv1)  # Add BatchNormalization
+            conv1 = Activation("relu")(conv1)  # Add ReLU activation
+
+            conv2 = Conv2D(128, (3, 3), padding='same')(conv1)
+            conv2 = BatchNormalization()(conv2)  # Add BatchNormalization
+            conv2 = Activation("relu")(conv2)  # Add ReLU activation
             pool2 = MaxPooling2D(pool_size=(2, 2))(conv2)
 
             # Encoder block 3
-            conv1 = Conv2D(256, (3, 3), activation='relu', padding='same')(pool2)
-            conv2 = Conv2D(256, (3, 3), activation='relu', padding='same')(conv1)
-            conv3 = Conv2D(256, (3, 3), activation='relu', padding='same')(conv2)
+            conv1 = Conv2D(256, (3, 3), padding='same')(pool2)
+            conv1 = BatchNormalization()(conv1)  # Add BatchNormalization
+            conv1 = Activation("relu")(conv1)  # Add ReLU activation
+            conv2 = Conv2D(256, (3, 3), padding='same')(conv1)
+            conv2 = BatchNormalization()(conv2)  # Add BatchNormalization
+            conv2 = Activation("relu")(conv2)  # Add ReLU activation
+            conv3 = Conv2D(256, (3, 3), padding='same')(conv2)
+            conv3 = BatchNormalization()(conv3)  # Add BatchNormalization
+            conv3 = Activation("relu")(conv3)  # Add ReLU activation
             pool3 = MaxPooling2D(pool_size=(2, 2))(conv3)
 
             # Encoder block 4
-            conv1 = Conv2D(512, (3, 3), activation='relu', padding='same')(pool3)
-            conv2 = Conv2D(512, (3, 3), activation='relu', padding='same')(conv1)
-            conv3 = Conv2D(512, (3, 3), activation='relu', padding='same')(conv2)
+            conv1 = Conv2D(512, (3, 3), padding='same')(pool3)
+            conv1 = BatchNormalization()(conv1)  # Add BatchNormalization
+            conv1 = Activation("relu")(conv1)  # Add ReLU activation
+            conv2 = Conv2D(512, (3, 3), padding='same')(conv1)
+            conv2 = BatchNormalization()(conv2)  # Add BatchNormalization
+            conv2 = Activation("relu")(conv2)  # Add ReLU activation
+            conv3 = Conv2D(512, (3, 3), padding='same')(conv2)
+            conv3 = BatchNormalization()(conv3)  # Add BatchNormalization
+            conv3 = Activation("relu")(conv3)  # Add ReLU activation
             pool4 = MaxPooling2D(pool_size=(2, 2))(conv3)
-
-            # # Encoder block 5
-            # conv1 = Conv2D(512, (3, 3), activation='relu', padding='same')(pool4)
-            # conv2 = Conv2D(512, (3, 3), activation='relu', padding='same')(conv1)
-            # conv3 = Conv2D(512, (3, 3), activation='relu', padding='same')(conv2)
-            # pool5 = MaxPooling2D(pool_size=(2, 2))(conv3)
 
             m_output = pool4
 
         # Decoder block 1
         x = UpSampling2D(size=(2, 2))(m_output)
-        x = Conv2D(512, (3, 3), activation='relu', padding='same')(x)
-        x = Conv2D(512, (3, 3), activation='relu', padding='same')(x)
-        x = Conv2D(512, (3, 3), activation='relu', padding='same')(x)
+        x = Conv2D(512, (3, 3), padding='same')(x)
+        x = BatchNormalization()(x)  # Add BatchNormalization
+        x = Activation("relu")(x)  # Add ReLU activation
+        x = Conv2D(512, (3, 3), padding='same')(x)
+        x = BatchNormalization()(x)  # Add BatchNormalization
+        x = Activation("relu")(x)  # Add ReLU activation
+        x = Conv2D(512, (3, 3), padding='same')(x)
+        x = BatchNormalization()(x)  # Add BatchNormalization
+        x = Activation("relu")(x)  # Add ReLU activation
 
         # Decoder block 2
         x = UpSampling2D(size=(2, 2))(x)
-        x = Conv2D(256, (3, 3), activation='relu', padding='same')(x)
-        x = Conv2D(256, (3, 3), activation='relu', padding='same')(x)
-        x = Conv2D(256, (3, 3), activation='relu', padding='same')(x)
+        x = Conv2D(256, (3, 3), padding='same')(x)
+        x = BatchNormalization()(x)  # Add BatchNormalization
+        x = Activation("relu")(x)  # Add ReLU activation
+        x = Conv2D(256, (3, 3), padding='same')(x)
+        x = BatchNormalization()(x)  # Add BatchNormalization
+        x = Activation("relu")(x)  # Add ReLU activation
+        x = Conv2D(256, (3, 3), padding='same')(x)
+        x = BatchNormalization()(x)  # Add BatchNormalization
+        x = Activation("relu")(x)  # Add ReLU activation
 
         # Decoder block 3
         x = UpSampling2D(size=(2, 2))(x)
-        x = Conv2D(128, (3, 3), activation='relu', padding='same')(x)
-        x = Conv2D(128, (3, 3), activation='relu', padding='same')(x)
+        x = Conv2D(128, (3, 3), padding='same')(x)
+        x = BatchNormalization()(x)  # Add BatchNormalization
+        x = Activation("relu")(x)  # Add ReLU activation
+        x = Conv2D(128, (3, 3), padding='same')(x)
+        x = BatchNormalization()(x)  # Add BatchNormalization
+        x = Activation("relu")(x)  # Add ReLU activation
 
         # Decoder block 4
         x = UpSampling2D(size=(2, 2))(x)
-        x = Conv2D(64, (3, 3), activation='relu', padding='same')(x)
-        x = Conv2D(64, (3, 3), activation='relu', padding='same')(x)
+        x = Conv2D(64, (3, 3), padding='same')(x)
+        x = BatchNormalization()(x)  # Add BatchNormalization
+        x = Activation("relu")(x)  # Add ReLU activation
+        x = Conv2D(64, (3, 3), padding='same')(x)
+        x = BatchNormalization()(x)  # Add BatchNormalization
+        x = Activation("relu")(x)  # Add ReLU activation
 
         # Final segmentation layer
-        x = Conv2D(self.n_classes, (1, 1), activation='softmax')(x)
+        x = Conv2D(self.n_classes, (1, 1))(x)
+        x = BatchNormalization()(x)  # Add BatchNormalization
+        x = Activation("softmax")(x)  # Add ReLU activation
 
         model = Model(inputs=input_m, outputs=x)
 
