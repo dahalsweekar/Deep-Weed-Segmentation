@@ -64,7 +64,19 @@ for ```pspnet``` image size must be divisible by 48, the image size will be adju
 ## Dataset
 
   > Root of the dataset, by default, is ./data/CoFlyWeed-DB/
-
+```
+|
+|
+|__./data/CoFlyWeed-DB/
+	|
+	|___/images
+		|
+		|__*.jpg .png*
+	|
+	|___/labels
+		|
+		|__*.jpg .png*
+```
 ## Evaluation
 
  > A model must be trained and saved in ./models/ folder first
