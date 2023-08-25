@@ -73,7 +73,7 @@ for ```pspnet``` image size must be divisible by 48, the image size will be adju
 		|
 		|__*.jpg .png*
 	|
-	|___/labels
+	|___/labels_1d
 		|
 		|__*.jpg .png*
 ```
