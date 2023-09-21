@@ -55,7 +55,7 @@ for ```pspnet``` image size must be divisible by 48, the image size will be adju
 
   > Training is set to early stopping
  ```
- 1. python services/train.py --network unet --backbone vgg16 --patch_size 128 --batch_size 4 --epoch 20 --score --data_path /content/drive/MyDrive/data/CoFly-WeedDB 
+ python services/train.py --network unet --backbone vgg16 --patch_size 128 --batch_size 4 --epoch 20 --score --data_path /content/drive/MyDrive/data/CoFly-WeedDB 
  ```
 ## Models
 
@@ -81,7 +81,7 @@ for ```pspnet``` image size must be divisible by 48, the image size will be adju
 
  > A model must be trained and saved in ./models/ folder first
  ```
- 1. python services/eval.py --network unet --backbone vgg16
+ python services/eval.py --network unet --backbone vgg16
  ```
 
 ## Third-Party Implementations
