@@ -34,9 +34,9 @@ This repository offers an implementation of diverse segmentation models designed
 | Network  | BackBone |
 | ------------- | ------------- |
 | ```custom``` |```None``` |
-| ```unet``` | ```vgg16```, ```resnet34```, ```inceptionv3```, ```efficientnetb0```,                                                            ```densenet121```, ```mobilenetv2``` |
-| ```linknet``` | ```vgg16```, ```resnet34```, ```inceptionv3```, ```efficientnetb0```,                                                            ```densenet121```, ```mobilenetv2``` |
-| ```pspnet``` | ```vgg16```, ```resnet34```, ```inceptionv3```, ```efficientnetb0```,                                                            ```densenet121```, ```mobilenetv2``` |
+| ```unet``` | ```vgg16```, ```resnet50```, ```inceptionv3```, ```efficientnetb0```,                                                            ```densenet121```, ```mobilenetv2``` |
+| ```linknet``` | ```vgg16```, ```resnet50```, ```inceptionv3```, ```efficientnetb0```,                                                            ```densenet121```, ```mobilenetv2``` |
+| ```pspnet``` | ```vgg16```, ```resnet50```, ```inceptionv3```, ```efficientnetb0```,                                                            ```densenet121```, ```mobilenetv2``` |
 | ```segnet``` | ```vgg16```, ```resnet50```, ```inceptionv3```, ```efficientnetb0```,                                                             ```densenet121```, ```mobilenetv2``` |
 | ```deeplabv3``` | ```vgg16```, ```resnet50```, ```inceptionv3```, ```efficientnetb0```,                                                             ```densenet121```, ```mobilenetv2``` |
 
