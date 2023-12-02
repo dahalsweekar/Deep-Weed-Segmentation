@@ -37,7 +37,7 @@ class Eval:
         self.backbone = backbone
         self.PATCH_SIZE = self.size_(PATCH_SIZE)
         (self.Y_train_cat, self.Y_test_cat, self.X_train, self.Y_test, self.X_test, self.p_weights,
-         self.n_classes) = Prepare_Dataset(self.PATCH_SIZE, binary, data_path=data_path).prepare_all()
+         self.n_classes) = Prepare_Dataset(self.PATCH_SIZE, binary=binary, backbone=backbone, data_path=data_path).prepare_all()
         self.path_to_model = path_to_model
         self.total_loss = Prepare_Dataset(self.PATCH_SIZE).get_loss(p_weights=self.p_weights)
         self.binary = binary
