@@ -42,7 +42,7 @@ class Test:
         self.weights_path = weight_path
         self.input_image = input_image
         (self.Y_train_cat, self.Y_test_cat, self.X_train, self.Y_test, self.X_test, self.p_weights,
-         self.n_classes) = Prepare_Dataset(self.PATCH_SIZE, binary, data_path=data_path).prepare_all()
+         self.n_classes) = Prepare_Dataset(self.PATCH_SIZE, binary=binary, backbone=backbone, data_path=data_path).prepare_all()
         self.total_loss = Prepare_Dataset(self.PATCH_SIZE).get_loss(p_weights=self.p_weights)
         self.binary = binary
 
