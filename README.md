@@ -3,6 +3,8 @@
 ## Introduction
 This repository offers an implementation of diverse segmentation models designed for classifying weeds into four distinct categories. The provided method allows the integration of different networks and backbones to create a combination of choices.
 
+For more detail, please refer to our paper: [Deep Learning-Based Weed Detection Using UAV Images: A Comparative Study](https://www.mdpi.com/2504-446X/7/10/624)
+
 ## Task List
   - [x] Blank visualizer problem (Only occurs when saved model is loaded)
   - [x] UndefinedMetricWarning: F-score is ill-defined and being set to 0.0 in labels with no predicted samples (Only occurs when saved model is loaded)
